@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`userLogin should render correctly in "debug" mode 1`] = `
+<WithStyles(ForwardRef(Container))
+  className="main"
+  component="main"
+  maxWidth="xs"
+>
+  <CssBaseline />
+  <div>
+    <WithStyles(ForwardRef(Typography))
+      component="h1"
+      variant="h5"
+    >
+      Sign in
+    </WithStyles(ForwardRef(Typography))>
+    <form
+      noValidate={true}
+    >
+      <WithStyles(ForwardRef(TextField))
+        autoComplete="email"
+        autoFocus={true}
+        fullWidth={true}
+        id="email"
+        label="Email Address"
+        margin="normal"
+        name="email"
+        onChange={[Function]}
+        required={true}
+        style={
+          Object {
+            "borderColor": "#00c853 !important",
+          }
+        }
+        variant="outlined"
+      />
+      <WithStyles(ForwardRef(TextField))
+        autoComplete="current-password"
+        fullWidth={true}
+        id="password"
+        label="Password"
+        margin="normal"
+        name="password"
+        onChange={[Function]}
+        required={true}
+        type="password"
+        variant="outlined"
+      />
+      <WithStyles(ForwardRef(Button))
+        component={[Function]}
+        fullWidth={true}
+        onClick={[Function]}
+        to="/"
+        type="submit"
+        variant="contained"
+      >
+        Sign In
+      </WithStyles(ForwardRef(Button))>
+      <WithStyles(ForwardRef(Grid))
+        container={true}
+      >
+        <WithStyles(ForwardRef(Grid))
+          item={true}
+        >
+          <Link
+            href="#"
+            to="/register"
+            variant="body2"
+          >
+            Don't have an account? Sign Up
+          </Link>
+        </WithStyles(ForwardRef(Grid))>
+      </WithStyles(ForwardRef(Grid))>
+    </form>
+  </div>
+</WithStyles(ForwardRef(Container))>
+`;

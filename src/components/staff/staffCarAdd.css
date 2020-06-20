@@ -1,0 +1,30 @@
+body {
+    background-color: #ffffff;
+}
+
+.image {
+    background-size: cover;
+    background: url(https://source.unsplash.com/random) no-repeat center;
+}
+
+.paper {
+    margin-top: 64px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.avatar {
+    margin: 8px;
+    background-color: #ffffff;
+}
+
+.form {
+    width: 100%;
+    margin-top: 8px;
+}
+
+.submit {
+    background-color: #2e7d32;
+    color: white;
+}

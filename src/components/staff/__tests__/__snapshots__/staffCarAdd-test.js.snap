@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`userLogin should render correctly in "debug" mode 1`] = `
+<WithStyles(ForwardRef(Container))
+  component="main"
+  maxWidth="xs"
+>
+  <CssBaseline />
+  <div>
+    <WithStyles(ForwardRef(Typography))
+      component="h1"
+      variant="h5"
+    >
+      Add Car
+    </WithStyles(ForwardRef(Typography))>
+    <form
+      noValidate={true}
+    >
+      <WithStyles(ForwardRef(TextField))
+        autoComplete="email"
+        autoFocus={true}
+        fullWidth={true}
+        id="car_name"
+        label="Car Name"
+        margin="normal"
+        name="car_name"
+        onChange={[Function]}
+        required={true}
+        style={
+          Object {
+            "borderColor": "#00c853 !important",
+          }
+        }
+        variant="outlined"
+      />
+      <WithStyles(ForwardRef(TextField))
+        fullWidth={true}
+        id="car_type"
+        label="Car Type"
+        margin="normal"
+        name="car_type"
+        onChange={[Function]}
+        required={true}
+        variant="outlined"
+      />
+      <WithStyles(ForwardRef(TextField))
+        fullWidth={true}
+        id="car_type"
+        label="Plate Number"
+        margin="normal"
+        name="plate_number"
+        onChange={[Function]}
+        required={true}
+        variant="outlined"
+      />
+      <WithStyles(ForwardRef(TextField))
+        fullWidth={true}
+        id="fuel"
+        label="Fuel"
+        margin="normal"
+        name="fuel"
+        onChange={[Function]}
+        required={true}
+        variant="outlined"
+      />
+      <WithStyles(ForwardRef(TextField))
+        fullWidth={true}
+        id="description"
+        label="Description"
+        margin="normal"
+        name="description"
+        onChange={[Function]}
+        required={true}
+        variant="outlined"
+      />
+      <WithStyles(ForwardRef(TextField))
+        fullWidth={true}
+        id="price"
+        label="Price"
+        margin="normal"
+        name="price"
+        onChange={[Function]}
+        required={true}
+        variant="outlined"
+      />
+      <WithStyles(ForwardRef(TextField))
+        fullWidth={true}
+        id="image"
+        label="Image"
+        margin="normal"
+        name="image"
+        onChange={[Function]}
+        required={true}
+        variant="outlined"
+      />
+      <WithStyles(ForwardRef(Button))
+        component={[Function]}
+        fullWidth={true}
+        onClick={[Function]}
+        to="/staff"
+        type="submit"
+        variant="contained"
+      >
+        Add
+      </WithStyles(ForwardRef(Button))>
+    </form>
+  </div>
+</WithStyles(ForwardRef(Container))>
+`;

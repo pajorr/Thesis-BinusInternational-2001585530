@@ -1,0 +1,104 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`userLogin should render correctly in "debug" mode 1`] = `
+<WithStyles(ForwardRef(Container))
+  component="main"
+  maxWidth="xs"
+>
+  <CssBaseline />
+  <div>
+    <WithStyles(ForwardRef(Typography))
+      component="h1"
+      variant="h5"
+    >
+      Sign up
+    </WithStyles(ForwardRef(Typography))>
+    <form
+      noValidate={true}
+    >
+      <WithStyles(ForwardRef(Grid))
+        container={true}
+        spacing={2}
+      >
+        <WithStyles(ForwardRef(Grid))
+          item={true}
+          xs={12}
+        >
+          <WithStyles(ForwardRef(TextField))
+            autoComplete="fname"
+            autoFocus={true}
+            fullWidth={true}
+            label="Name"
+            name="name"
+            onChange={[Function]}
+            required={true}
+            variant="outlined"
+          />
+        </WithStyles(ForwardRef(Grid))>
+        <WithStyles(ForwardRef(Grid))
+          item={true}
+          xs={12}
+        >
+          <WithStyles(ForwardRef(TextField))
+            autoComplete="email"
+            fullWidth={true}
+            label="Email Address"
+            name="email"
+            onChange={[Function]}
+            required={true}
+            variant="outlined"
+          />
+        </WithStyles(ForwardRef(Grid))>
+        <WithStyles(ForwardRef(Grid))
+          item={true}
+          xs={12}
+        >
+          <WithStyles(ForwardRef(TextField))
+            autoComplete="current-password"
+            fullWidth={true}
+            label="Password"
+            name="password"
+            onChange={[Function]}
+            required={true}
+            type="password"
+            variant="outlined"
+          />
+        </WithStyles(ForwardRef(Grid))>
+        <WithStyles(ForwardRef(Grid))
+          item={true}
+          xs={12}
+        >
+          <Link
+            to="/login"
+          >
+            <WithStyles(ForwardRef(Button))
+              fullWidth={true}
+              onClick={[Function]}
+              type="button"
+              variant="contained"
+            >
+              Sign Up
+            </WithStyles(ForwardRef(Button))>
+          </Link>
+        </WithStyles(ForwardRef(Grid))>
+        <WithStyles(ForwardRef(Grid))
+          container={true}
+          justify="flex-end"
+        >
+          <WithStyles(ForwardRef(Grid))
+            item={true}
+          >
+            <Link
+              href="#"
+              to="/login"
+              variant="body2"
+            >
+              Already have an account? Sign in
+            </Link>
+          </WithStyles(ForwardRef(Grid))>
+        </WithStyles(ForwardRef(Grid))>
+      </WithStyles(ForwardRef(Grid))>
+    </form>
+  </div>
+</WithStyles(ForwardRef(Container))>
+`;

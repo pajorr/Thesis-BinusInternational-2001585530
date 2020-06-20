@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`userLogin should render correctly in "debug" mode 1`] = `
+<StaffCarList
+  classes={
+    Object {
+      "listStyle": "StaffCarList-listStyle-2",
+      "root": "StaffCarList-root-1",
+    }
+  }
+  debug={true}
+/>
+`;

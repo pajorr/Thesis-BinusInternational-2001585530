@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`userLogin should render correctly in "debug" mode 1`] = `
+<MyBooking
+  classes={
+    Object {
+      "listStyle": "MyBooking-listStyle-2",
+      "root": "MyBooking-root-1",
+    }
+  }
+  debug={true}
+/>
+`;
