@@ -2,8 +2,7 @@ import React from 'react';
 import PaypalExpressBtn from 'react-paypal-express-checkout';
 //0. import propTypes
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/styles';
-import Grid from "@material-ui/core/Grid/Grid";
+import {withStyles} from '@material-ui/styles';
 import Button from "@material-ui/core/Button/Button";
 import List from "@material-ui/core/List/List";
 import ListItem from "@material-ui/core/ListItem/ListItem";
@@ -11,7 +10,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText/ListItemText";
 import Divider from "@material-ui/core/Divider/Divider";
 import InboxIcon from '@material-ui/icons/Inbox';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 //1. declare style as function var
 const styles = theme => ({
@@ -31,6 +30,8 @@ class MyBooking extends React.Component {
 
         this.state = {
             bookingList: [],
+            returnedBookingList: [],
+            priceIndex: ""
         }
     }
 
@@ -51,7 +52,24 @@ class MyBooking extends React.Component {
             .catch(err => console.log(err));
     }
 
-    returnCar(carid, id) {
+    getTotalPrice() {
+        fetch('http://159.65.129.126/api/returncars/' + localStorage.getItem("userId"), {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+        }).then(res => res.json())
+            .then(data => {
+                const bookData = JSON.stringify(data);
+                const obj = JSON.parse(bookData);
+                this.setState({...this.state.returnedBookingList, returnedBookingList: obj});
+                console.log(this.state.bookingList);
+            })
+            .catch(err => console.log(err));
+    }
+
+    returnCar(id) {
         // let today = new Date();
         // let date = today.getFullYear()+"-"+("0" + (today.getMonth() + 1)).slice(-2)+"-"+("0" + today.getDate()).slice(-2);
 
@@ -62,8 +80,6 @@ class MyBooking extends React.Component {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                user_id: localStorage.getItem("userId"),
-                car_id: carid,
                 book_id: id,
                 // date_return: date
             })
@@ -87,38 +103,43 @@ class MyBooking extends React.Component {
             });
     }
 
+    checkPrice(obj) {
+        const vehicleId = obj.vehicle_id;
+        return this.state.returnedBookingList.findIndex(obj => obj.vehicle_id === vehicleId);
+    }
+
 
     checkPaid(obj) {
-        if(obj.returned === false) {
-            return(
+        if (obj.taken === 1) {
+            return (
                 <div>
-                    <Button onClick={() => this.returnCar(obj.car_id, obj.id)}>Return</Button>
+                    <Button onClick={() => this.returnCar(obj.id)}>Return</Button>
                 </div>
             )
         }
 
-        if(obj.returned === true && obj.paid === true) {
-            return(
+        if (obj.taken === 0 && obj.paid === true) {
+            return (
                 <div>
                     Paid
                 </div>
             )
-        }
-
-        else {
+        } else {
             const client = {
-                sandbox:    'AbqSx8i-kX1D6W2hfNaxJpw0QyoYM_YWp78WuJBHqA2HTfNeoheZDTWR6JNJcCQc3r07hW-tN3cXNqYI',
+                sandbox: 'AaqYUsLV0UAleQ_TnpmOLdYT_NKeuZqdsu1lgUh-3k4sLxrERKsXRNuTMYkwDWhy8lyV2r1LsIaavup7',
                 production: 'YOUR-PRODUCTION-APP-ID',
             };
-            return(
-                    <div>
-                        <PaypalExpressBtn client={client} currency={'AUD'} total={obj.total_price} onSuccess={() => this.setPaid(obj)}/>
-                    </div>
+            return (
+                <div>
+                    <PaypalExpressBtn client={client} currency={'AUD'} total={
+                        this.state.returnedBookingList[this.checkPrice(obj)].price} onSuccess={() => this.setPaid(obj)}/>
+                </div>
             )
         }
     }
 
     componentDidMount() {
+        this.getTotalPrice();
         this.getBookingList();
     }
 
@@ -134,7 +155,7 @@ class MyBooking extends React.Component {
                             <ListItemIcon>
                                 <InboxIcon />
                             </ListItemIcon>
-                            <ListItemText primary={"Car Name: " + obj.car_name} />
+                            <ListItemText primary={"Car Name: " + obj.vehicle_name} />
                             <ListItemText secondary={"Car Plate: " + obj.plate_number} />
                             <ListItemText secondary={"Car Image: " + obj.image} />
                             <ListItemText secondary={"Price: "  + obj.price + "/h"} />
@@ -150,16 +171,18 @@ class MyBooking extends React.Component {
     }
 
     render() {
-        return(
-            <div>
-                <List component="nav" aria-label="main mailbox folders">
-                    <Link to="/">
-                        <Button>◀ Back</Button>
-                    </Link>
-                </List>
-                {this.renderBookingList()}
-            </div>
-        )
+        if(this.state.returnedBookingList != null) {
+            return (
+                <div>
+                    <List component="nav" aria-label="main mailbox folders">
+                        <Link to="/">
+                            <Button>◀ Back</Button>
+                        </Link>
+                    </List>
+                    {this.renderBookingList()}
+                </div>
+            )
+        }
     }
 }
 

@@ -92,7 +92,7 @@ class Booking extends React.Component {
     renderCarList() {
         return this.state.carList.map(obj => (
             <MenuItem value={obj.id}>
-                {obj.car_name}
+                {obj.vehicle_name}
             </MenuItem>
         ));
     }
@@ -106,7 +106,7 @@ class Booking extends React.Component {
             },
             body: JSON.stringify({
                 user_id: this.state.userId,
-                car_id: this.state.carSelected + 1,
+                vehicle_id: this.state.carSelected + 1,
             })
         }).then(res => res.json())
             .catch(err => console.log(err));
@@ -197,7 +197,7 @@ class Booking extends React.Component {
                                     label="Car Selected"
                                     autoFocus
                                     disabled
-                                    value={this.state.carList[this.props.data].car_name}
+                                    value={this.state.carList[this.props.data].vehicle_name}
                                 />
                             </Grid>
                             {/*<Grid item xs={12}>*/}

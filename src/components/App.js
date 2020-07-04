@@ -18,6 +18,8 @@ import StaffCarList from "./staff/staffCarList";
 import MyBooking from "./booking/userMyBookings";
 import StaffCarAdd from "./staff/staffCarAdd";
 import Redirect from "react-router-dom/es/Redirect";
+import historyBooking from "./booking/historyBooking";
+import motorBookingHistory from "./booking/motorBookingHistory";
 
 export class App extends React.Component {
 
@@ -40,6 +42,8 @@ export class App extends React.Component {
                             <Route path="/staffcarlist" component={StaffCarList}/>
                             <Route path="/mybookings" component={MyBooking}/>
                             <Route path="/staffaddcar" component={StaffCarAdd}/>
+                            <Route path="/bookinghistory" component={historyBooking}/>
+                            <Route path="/motorbookinghistory" component={motorBookingHistory}/>
                             {/*<Route render={() => <Redirect to="/" />} />*/}
                         </div>
                     </Router>
@@ -87,5 +91,5 @@ const mapStyles = {
 
 
 export default GoogleApiWrapper({
-    apiKey: 'AIzaSyBMvbu73pJlnSlCobcEH9MgOVwXrv8dyKc'
+    apiKey: 'AIzaSyB39NEIuboRnTEzFIwmXno95gEkDQ1-rHE'
 })(App);

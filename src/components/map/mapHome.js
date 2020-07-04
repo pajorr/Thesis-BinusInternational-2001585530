@@ -1,6 +1,7 @@
 import React from 'react';
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 import carIcon from './../../rsc/topcar.png';
+import motorIcon from './../../rsc/topmotor.png';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
@@ -33,7 +34,9 @@ export class mapHome extends React.Component {
             expanded: false,
             carList: [],
             loading: true,
-            selectedCar: ""
+            selectedCar: "",
+            motorcycleList: [],
+            handleCar: true
         };
 
         this.handleExpandClick = this.handleExpandClick.bind(this);
@@ -49,16 +52,21 @@ export class mapHome extends React.Component {
     }
 
     handleSelectCar(car) {
-        this.setState({...this.state.selectedCar, selectedCar: this.state.carList.findIndex(obj => obj.car_name === car)});
+        this.setState({...this.state.selectedCar, selectedCar: this.state.carList.findIndex(obj => obj.vehicle_name === car)});
+        this.renderBookingForm();
+    }
+
+    handleSelectMotorcycle(motorcycle) {
+        this.setState({...this.state.selectedCar, selectedCar: motorcycle-1});
         this.renderBookingForm();
     }
 
     onMarkerClick(obj) {
-        this.handleSelectCar(obj.car_name);
+        this.handleSelectCar(obj.vehicle_name);
     }
 
     getCar() {
-        fetch('http://159.65.129.126/api/cars', {
+        fetch('http://159.65.129.126/api/showcar', {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
@@ -77,13 +85,101 @@ export class mapHome extends React.Component {
             .catch(err => console.log(err));
     };
 
+    getMotorcycle() {
+        fetch('http://159.65.129.126/api/showmotorcycle', {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+        }).then(res => res.json())
+            .then(data => {
+                const motorcycleData = JSON.stringify(data);
+                const obj = JSON.parse(motorcycleData);
+                //const resp =  axios.get(`http://159.65.129.126/api/cars/1`);
+                this.setState({...this.state.motorcycleList, motorcycleList: obj}); //how to set a state value
+                // this.setState({...this.state.carList, selectedCar: obj})
+                console.log(this.state.motorcycleList);
+                this.setState({data, loading: false});
+            })
+            .catch(err => console.log(err));
+    };
+
     componentDidMount() {
         this.getCar();
+        this.getMotorcycle();
         console.log(this.state.selectedCar);
     }
 
     renderCarList() {
-        return this.state.carList.map(obj =>
+        if(this.state.handleCar === true) {
+            return this.state.carList.map(obj =>
+                (
+                    <Card className={style.card} style={{width: '100%', marginBottom: '16px'}}>
+                        <CardHeader
+                            avatar={
+                                <Avatar aria-label="Car" className={style.avatar}>
+                                    {obj.id}
+                                </Avatar>
+                            }
+                            action={
+                                <IconButton aria-label="settings">
+                                    <MoreVertIcon/>
+                                </IconButton>
+                            }
+                            title={obj.vehicle_name}
+                            subheader={obj.vehicle_type}
+                        />
+                        <CardMedia
+                            className={style.media}
+                            image="./component/images/car.jpg"
+                            title={style.card}
+                        />
+                        <CardContent>
+                            <Typography variant="body2" color="textSecondary" component="p">
+                                category: {obj.vehicle_category}
+                                <br/>
+                                description: {obj.description}
+                                <br/>
+                                price: {obj.price}
+                                <br/>
+                                fuel: {obj.fuel}
+                                <br/>
+                                plate_number: {obj.plate_number}
+                                <br/>
+                            </Typography>
+                            <Button
+                                onClick={() => this.handleSelectCar(obj.vehicle_name) /*this is how you properly fire a button method*/}>Book</Button>
+                        </CardContent>
+                        <CardActions disableSpacing>
+                            <IconButton aria-label="add to favorites">
+                                <FavoriteIcon/>
+                            </IconButton>
+                            <IconButton aria-label="share">
+                                <ShareIcon/>
+                            </IconButton>
+                            <IconButton
+                                onClick={this.handleExpandClick}
+                                aria-expanded={this.state.expanded}
+                                aria-label="show more"
+                            >
+                                <ExpandMoreIcon/>
+                            </IconButton>
+                        </CardActions>
+                        <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
+                            <CardContent>
+                                <Typography paragraph>Card Content</Typography>
+                            </CardContent>
+                        </Collapse>
+                    </Card>
+                ));
+        } else {
+            return (this.renderMotorcycleList());
+        }
+    }
+
+    renderMotorcycleList() {
+        return this.state.motorcycleList.map(obj =>
             (
                 <Card className={style.card} style={{width: '100%', marginBottom: '16px'}}>
                     <CardHeader
@@ -97,16 +193,20 @@ export class mapHome extends React.Component {
                                 <MoreVertIcon />
                             </IconButton>
                         }
-                        title = {obj.car_name}
-                        subheader={obj.car_type}
+                        title = {obj.vehicle_name}
+                        subheader={obj.vehicle_type}
                     />
                     <CardMedia
                         className={style.media}
                         image="./component/images/car.jpg"
-                        title={style.car_name}
+                        title={style.card}
                     />
                     <CardContent>
                         <Typography variant="body2" color="textSecondary" component="p">
+                            category: {obj.vehicle_category}
+                            <br/>
+                            description: {obj.description}
+                            <br/>
                             price: {obj.price}
                             <br/>
                             fuel: {obj.fuel}
@@ -114,7 +214,7 @@ export class mapHome extends React.Component {
                             plate_number: {obj.plate_number}
                             <br/>
                         </Typography>
-                        <Button onClick={() => this.handleSelectCar(obj.car_name) /*this is how you properly fire a button method*/}>Book</Button>
+                        <Button onClick={() => this.handleSelectMotorcycle(obj.id) /*this is how you properly fire a button method*/}>Book</Button>
                     </CardContent>
                     <CardActions disableSpacing>
                         <IconButton aria-label="add to favorites">
@@ -154,6 +254,28 @@ export class mapHome extends React.Component {
         ))
     }
 
+    renderMotorMarkers() {
+        return this.state.motorcycleList.map(obj => (
+            <Marker
+                position={{ lat: obj.latitude, lng: obj.longitude}}
+                icon={{
+                    url: motorIcon,
+                    anchor: new this.props.google.maps.Point(9,19),
+                    scaledSize: new this.props.google.maps.Size(18,38)
+                }}
+                onClick={() => this.onMarkerClick(obj)}
+            />
+        ))
+    }
+
+    handleSelectVehicle(e) {
+        if(e==="motorcycle"){
+            this.setState({...this.state.handleCar, handleCar: false});
+        }else{
+            this.setState({...this.state.handleCar, handleCar: true});
+        }
+    }
+
     renderBookingForm() {
         if(this.state.selectedCar !== "") {
             return (<Booking data={this.state.selectedCar}/>)
@@ -162,6 +284,8 @@ export class mapHome extends React.Component {
                 <div>
                     <Grid container spacing={2} styling={{width: '100vh'}}>
                         <Grid item md={4} xs={12}>
+                            <Button onClick={() => this.handleSelectVehicle("car")}>Car</Button>
+                            <Button onClick={() => this.handleSelectVehicle("motorcycle")}>Motorcycle</Button>
                             <div style={{maxHeight: 680, overflow: 'auto', maxWidth: 600}}>
                                 {this.renderCarList()}
                             </div>
@@ -171,9 +295,10 @@ export class mapHome extends React.Component {
                                 google={this.props.google}
                                 zoom={8}
                                 style={mapStyles}
-                                initialCenter={{lat: -37.8083605, lng: 144.9646012}}
+                                initialCenter={{lat: -6.1754, lng: 106.8272}}
                             >
                                 {this.renderCarMarkers()}
+                                {this.renderMotorMarkers()}
                             </Map>
                         </Grid>
                     </Grid>
@@ -214,5 +339,5 @@ const mapStyles = {
 };
 
 export default GoogleApiWrapper({
-    apiKey: 'AIzaSyBMvbu73pJlnSlCobcEH9MgOVwXrv8dyKc'
+    apiKey: 'AIzaSyB39NEIuboRnTEzFIwmXno95gEkDQ1-rHE'
 })(mapHome);

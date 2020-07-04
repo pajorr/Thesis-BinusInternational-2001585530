@@ -161,7 +161,7 @@ export default function PersistentDrawerLeft() {
                     </IconButton>
                     <Typography variant="h6" noWrap  style={{flex: 1}}>
                         <Link to="/" style={{textDecoration: 'none', color: '#ffffff'}}>
-                            GoCar
+                            We-Go
                         </Link>
                     </Typography>
                     {handleLoggedIn()}
@@ -188,7 +188,19 @@ export default function PersistentDrawerLeft() {
                     <Link to="/mybookings">
                         <ListItem button>
                             <ListItemIcon><MailIcon/></ListItemIcon>
-                            <ListItemText primary={"My Bookings"}/>
+                            <ListItemText primary={"Return and Pay"}/>
+                        </ListItem>
+                    </Link>
+                    <Link to="/bookinghistory">
+                        <ListItem button>
+                            <ListItemIcon><MailIcon/></ListItemIcon>
+                            <ListItemText primary={"Car Booking History"}/>
+                        </ListItem>
+                    </Link>
+                    <Link to="/motorbookinghistory">
+                        <ListItem button>
+                            <ListItemIcon><MailIcon/></ListItemIcon>
+                            <ListItemText primary={"Motorcycle Booking History"}/>
                         </ListItem>
                     </Link>
                 </List>
