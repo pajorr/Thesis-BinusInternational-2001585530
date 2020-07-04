@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
         }),
-        background: "#00c853"
+        background: "#000000"
     },
     appBarShift: {
         width: `calc(100% - ${drawerWidth}px)`,
@@ -43,7 +43,7 @@ const useStyles = makeStyles(theme => ({
         }),
     },
     loginButton: {
-      background: "#2e7d32",
+      background: "#000000",
         color: "#ffffff",
     },
     loginLink: {
