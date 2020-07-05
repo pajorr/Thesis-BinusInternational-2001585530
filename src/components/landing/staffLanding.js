@@ -57,7 +57,7 @@ class StaffLanding extends React.Component {
                             <Button
                                 className={classes.buttonStyle}
                             >
-                                Car List
+                                Vehicle List
                             </Button>
                         </Link>
                     </Grid>
