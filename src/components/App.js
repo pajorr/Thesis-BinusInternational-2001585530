@@ -20,6 +20,7 @@ import StaffCarAdd from "./staff/staffCarAdd";
 import Redirect from "react-router-dom/es/Redirect";
 import historyBooking from "./booking/historyBooking";
 import motorBookingHistory from "./booking/motorBookingHistory";
+import trackVehicle from "./map/trackvehicle";
 
 export class App extends React.Component {
 
@@ -36,14 +37,15 @@ export class App extends React.Component {
                             <Route path="/register" component={Register}/>
                             <Route path="/staffregister" component={StaffRegister}/>
                             <Route path="/stafflogin" component={StaffLogin}/>
+                            <Route path="/mybookings" component={MyBooking}/>
                             <Route path="/staff" component={StaffLanding}/>
                             <Route path="/staffbooking" component={StaffBooking}/>
                             <Route path="/staffuserlist" component={StaffUserList}/>
                             <Route path="/staffcarlist" component={StaffCarList}/>
-                            <Route path="/mybookings" component={MyBooking}/>
                             <Route path="/staffaddcar" component={StaffCarAdd}/>
                             <Route path="/bookinghistory" component={historyBooking}/>
                             <Route path="/motorbookinghistory" component={motorBookingHistory}/>
+                            <Route path="/trackvehicle" component={trackVehicle}/>
                             {/*<Route render={() => <Redirect to="/" />} />*/}
                         </div>
                     </Router>

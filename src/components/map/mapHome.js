@@ -286,7 +286,7 @@ export class mapHome extends React.Component {
                         <Grid item md={4} xs={12}>
                             <Button onClick={() => this.handleSelectVehicle("car")}>Car</Button>
                             <Button onClick={() => this.handleSelectVehicle("motorcycle")}>Motorcycle</Button>
-                            <div style={{maxHeight: 680, overflow: 'auto', maxWidth: 600}}>
+                            <div style={{maxHeight: 780, overflow: 'auto', maxWidth: 600}}>
                                 {this.renderCarList()}
                             </div>
                         </Grid>

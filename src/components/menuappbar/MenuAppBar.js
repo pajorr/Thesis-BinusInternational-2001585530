@@ -19,6 +19,7 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import Button from "@material-ui/core/Button/Button";
 import {Link} from 'react-router-dom';
+import Avatar from "@material-ui/core/Avatar";
 
 const drawerWidth = 240;
 
@@ -125,9 +126,10 @@ export default function PersistentDrawerLeft() {
             return(
                 <List>
                     <ListItem>
-                        Logged in as: {localStorage.getItem("userName")}
-                        <br/>
-                        {localStorage.getItem("token")}
+                        <Avatar alt="John Doe" src="" />
+                    </ListItem>
+                    <ListItem>
+                        <h1>Welcome, <b>{localStorage.getItem("userName")}</b></h1>
                     </ListItem>
                 </List>
             )
@@ -160,7 +162,7 @@ export default function PersistentDrawerLeft() {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" noWrap  style={{flex: 1}}>
-                        <Link to="/" style={{textDecoration: 'none', color: '#ffffff'}}>
+                        <Link to="/" style={{textDecoration: 'none', color: '#ffffff'}} onClick={()=>window.location.reload()}>
                             We-Go
                         </Link>
                     </Typography>
@@ -185,22 +187,22 @@ export default function PersistentDrawerLeft() {
                 {handleSidebarLoggedIn()}
                 <Divider />
                 <List>
-                    <Link to="/mybookings">
+                    <Link to="/mybookings" style={{textDecorationLine: 'none'}}>
                         <ListItem button>
                             <ListItemIcon><MailIcon/></ListItemIcon>
-                            <ListItemText primary={"Return and Pay"}/>
+                            <ListItemText secondary={"Return and Pay"}/>
                         </ListItem>
                     </Link>
-                    <Link to="/bookinghistory">
+                    <Link to="/bookinghistory" style={{textDecorationLine: 'none'}}>
                         <ListItem button>
                             <ListItemIcon><MailIcon/></ListItemIcon>
-                            <ListItemText primary={"Car Booking History"}/>
+                            <ListItemText secondary={"Car Booking History"}/>
                         </ListItem>
                     </Link>
-                    <Link to="/motorbookinghistory">
+                    <Link to="/motorbookinghistory" style={{textDecorationLine: 'none'}}>
                         <ListItem button>
                             <ListItemIcon><MailIcon/></ListItemIcon>
-                            <ListItemText primary={"Motorcycle Booking History"}/>
+                            <ListItemText secondary={"Motorcycle Booking History"}/>
                         </ListItem>
                     </Link>
                 </List>
