@@ -59,7 +59,6 @@ class historyBooking extends React.Component {
                                 <InboxIcon />
                             </ListItemIcon>
                             <ListItemText primary={"Car Name: " + obj.vehicle_name} />
-                            <ListItemText secondary={"Category: " + obj.category} />
                             <ListItemText secondary={"Description: " + obj.description} />
                             <ListItemText secondary={"Plate No.: " + obj.plate_number} />
                             <ListItemText secondary={"Booking date: " + obj.book_date} />

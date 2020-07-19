@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 
 import useStyles from './userLogin.css';
+import {history} from "../../_helpers/history";
 
 class Login extends React.Component {
 
@@ -27,25 +28,30 @@ class Login extends React.Component {
     }
 
     loginUser() {
-        return fetch('http://159.65.129.126/api/stafflogin', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                email: this.state.email,
-                password: this.state.password
+        if(Object.keys(this.state.email).length == 0 || Object.keys(this.state.password).length == 0) {
+            window.alert("Invalid Username or Password")
+        } else {
+            return fetch('http://159.65.129.126/api/stafflogin', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: this.state.email,
+                    password: this.state.password
+                })
+            }).then(function res(response) {
+                return response.json();
+            }).then(token => {
+                const tokenString = JSON.stringify(token);
+                localStorage.setItem("stafftoken", JSON.parse(tokenString).data.token);
+                localStorage.setItem("staffid", JSON.parse(tokenString).data.user.id);
+                localStorage.setItem("staffname", JSON.parse(tokenString).data.user.name);
+                history.push('/staff');
+                window.location.reload();
             })
-        }).then(function res(response) {
-            return response.json();
-        }).then(token => {
-            const tokenString = JSON.stringify(token);
-            localStorage.setItem("stafftoken", JSON.parse(tokenString).data.token);
-            localStorage.setItem("staffid", JSON.parse(tokenString).data.user.id);
-            localStorage.setItem("staffname", JSON.parse(tokenString).data.user.name);
-            window.location.reload();
-        })
+        }
     };
 
     handleChange = (e) => {
@@ -60,7 +66,7 @@ class Login extends React.Component {
                     <Typography component="h1" variant="h5">
                         Staff Sign in
                     </Typography>
-                    <form className={useStyles.form} noValidate>
+                    <form className={useStyles.form} >
                         <TextField
                             variant="outlined"
                             margin="normal"
@@ -86,7 +92,7 @@ class Login extends React.Component {
                             autoComplete="current-password"
                             onChange={this.handleChange}
                         />
-                        <Button component={Link} to="/staff"
+                        <Button
                                 type="submit"
                                 fullWidth
                                 variant="contained"

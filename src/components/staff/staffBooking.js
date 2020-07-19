@@ -67,9 +67,8 @@ class StaffBooking extends React.Component {
                                 <InboxIcon />
                             </ListItemIcon>
                             <ListItemText primary={"User Id: " + obj.user_id} />
-                            <ListItemText secondary={"Car Id: " + obj.car_id} />
+                            <ListItemText secondary={"Car Id: " + obj.vehicle_id} />
                             <ListItemText secondary={"Booking Date: " + obj.book_date} />
-                            <ListItemText secondary={"Duration: " + obj.duration} />
                         </ListItem>
                     </List>
                     <Divider />

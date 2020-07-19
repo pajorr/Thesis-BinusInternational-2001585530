@@ -131,6 +131,11 @@ export default function PersistentDrawerLeft() {
                     <ListItem>
                         <h1>Welcome, <b>{localStorage.getItem("userName")}</b></h1>
                     </ListItem>
+                    <ListItem>
+                        <Link to="/edituser" className={classes.loginLink} style={{textDecorationLine: 'none'}}>
+                            <Button>Edit Profile</Button>
+                        </Link>
+                    </ListItem>
                 </List>
             )
         } else {}

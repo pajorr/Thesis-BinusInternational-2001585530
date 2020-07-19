@@ -50,6 +50,16 @@ class StaffCarList extends React.Component {
             .catch(err => console.log(err));
     }
 
+    deleteVehicle(id) {
+        fetch('http://159.65.129.126/api/cars/' + id, {
+            method: 'DELETE',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+        }).catch(err => console.log(err));
+    }
+
     componentDidMount() {
         this.getBookingList();
     }
@@ -66,16 +76,20 @@ class StaffCarList extends React.Component {
                             <ListItemIcon>
                                 <InboxIcon />
                             </ListItemIcon>
-                            <ListItemText primary={"Car Id: " + obj.id} />
-                            <ListItemText secondary={"Car Name: " + obj.car_name} />
-                            <ListItemText secondary={"Car Type: " + obj.car_type} />
-                            <ListItemText secondary={"Car Plate: " + obj.plate_number} />
+                            <ListItemText primary={"Vehicle Id: " + obj.id} />
+                            <ListItemText secondary={"Staff Id: " + obj.staff_id} />
+                            <ListItemText secondary={"Vehicle3 Name: " + obj.vehicle_name} />
+                            <ListItemText secondary={"Vehicle Category: " + obj.vehicle_category} />
+                            <ListItemText secondary={"Vehicle Type: " + obj.vehicle_type} />
+                            <ListItemText secondary={"Vehicle Plate: " + obj.plate_number} />
                             <ListItemText secondary={"Fuel: " + obj.fuel} />
-                            <ListItemText secondary={"Car Description: " + obj.description} />
+                            <ListItemText secondary={"Vehicle Description: " + obj.description} />
                             <ListItemText secondary={"Price: " + obj.price} />
-                            <ListItemText secondary={"Car Image: " + obj.image} />
-                            <ListItemText secondary={"Car Status: " + obj.taken} />
+                            <ListItemText secondary={"Longitude: " + obj.longitude} />
+                            <ListItemText secondary={"Latitude: " + obj.latitude} />
+                            <ListItemText secondary={"Status: " + obj.taken} />
                             <Button>Edit</Button>
+                            <Button onClick={() => this.deleteVehicle(obj.id)}>Delete</Button>
                         </ListItem>
                     </List>
                     <Divider />

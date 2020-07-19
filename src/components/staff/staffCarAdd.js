@@ -18,13 +18,17 @@ class Login extends React.Component {
         super(props);
 
         this.state = {
-            car_name: {},
-            car_type: {},
+            vehicle_name: {},
+            vehicle_type: {},
+            vehicle_category: {},
             plate_number: {},
             fuel: {},
             description: {},
             price: {},
-            image: {}
+            image: {},
+            latitude: {},
+            longitude: {},
+            staff_id: {}
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -39,15 +43,20 @@ class Login extends React.Component {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                car_name: this.state.car_name,
-                car_type: this.state.car_type,
+                vehicle_name: this.state.vehicle_name,
+                vehicle_type: this.state.vehicle_type,
+                vehicle_category: this.state.vehicle_category,
                 plate_number: this.state.plate_number,
                 fuel: this.state.fuel,
                 description: this.state.description,
                 price: this.state.price,
-                image: this.state.image
+                image: this.state.image,
+                latitude: this.state.latitude,
+                longitude: this.state.longitude,
+                staff_id: this.state.staff_id
             })
         }).then(function res(response) {
+            console.log("car add");
             return response.json();
         })
     };
@@ -70,9 +79,9 @@ class Login extends React.Component {
                             margin="normal"
                             required
                             fullWidth
-                            id="car_name"
-                            label="Car Name"
-                            name="car_name"
+                            id="vehicle_name"
+                            label="Vehicle Name"
+                            name="vehicle_name"
                             autoComplete="email"
                             autoFocus
                             style={{borderColor: "#00c853 !important"}}
@@ -83,9 +92,19 @@ class Login extends React.Component {
                             margin="normal"
                             required
                             fullWidth
-                            name="car_type"
-                            label="Car Type"
-                            id="car_type"
+                            name="vehicle_type"
+                            label="Vehicle Type"
+                            id="vehicle_type"
+                            onChange={this.handleChange}
+                        />
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="vehicle_category"
+                            label="Vehicle Category"
+                            id="vehicle_category"
                             onChange={this.handleChange}
                         />
                         <TextField
@@ -138,8 +157,38 @@ class Login extends React.Component {
                             id="image"
                             onChange={this.handleChange}
                         />
-                        <Button component={Link} to="/staff"
-                                type="submit"
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="latitude"
+                            label="Latitude"
+                            id="latitude"
+                            onChange={this.handleChange}
+                        />
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="longitude"
+                            label="Longitude"
+                            id="longitude"
+                            onChange={this.handleChange}
+                        />
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="staff_id"
+                            label="Staff Id"
+                            id="staff_id"
+                            onChange={this.handleChange}
+                        />
+                        <Button
+                                type="button"
                                 fullWidth
                                 variant="contained"
                                 className={useStyles.submit}

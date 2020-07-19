@@ -158,9 +158,7 @@ class MyBooking extends React.Component {
                             <ListItemText primary={"Car Name: " + obj.vehicle_name} />
                             <ListItemText secondary={"Car Plate: " + obj.plate_number} />
                             <ListItemText secondary={"Car Image: " + obj.image} />
-                            <ListItemText secondary={"Price: "  + obj.price + "/h"} />
                             <ListItemText secondary={"Booked By: " + obj.name} />
-                            <ListItemText secondary={"Total Price: " + obj.total_price} />
                             {this.checkPaid(obj)}
                         </ListItem>
                     </List>

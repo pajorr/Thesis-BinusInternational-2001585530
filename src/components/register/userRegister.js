@@ -9,6 +9,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import {history} from "../../_helpers/history";
 
 const useStyles = makeStyles(theme => ({
     '@global': {
@@ -52,19 +53,27 @@ class Register extends React.Component {
     }
 
     registerUser() {
-        fetch('http://159.65.129.126/api/register', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                name: this.state.name,
-                email: this.state.email,
-                password: this.state.password
+        if(Object.keys(this.state.name).length == 0 || Object.keys(this.state.password).length == 0 || Object.keys(this.state.email).length == 0) {
+            window.alert("Invalid Username or Password")
+        } else {
+            fetch('http://159.65.129.126/api/register', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: this.state.name,
+                    email: this.state.email,
+                    password: this.state.password
+                })
+            }).then(function res(response) {
+                history.push('/');
+                window.location.reload();
+                return response.json();
             })
-        }).then(res => res.json())
-            .catch(err => console.log(err));
+                .catch(err => console.log(err));
+        }
     };
 
     handleChange = (e) => {
@@ -79,7 +88,7 @@ class Register extends React.Component {
                     <Typography component="h1" variant="h5">
                         Sign up
                     </Typography>
-                    <form className={useStyles.form} noValidate>
+                    <form className={useStyles.form}>
                         <Grid container spacing={2}>
                             <Grid item xs={12}>
                                 <TextField
@@ -135,7 +144,6 @@ class Register extends React.Component {
                             {/*</Grid>*/}
 
                             <Grid item xs={12}>
-                                <Link to="/login">
                                     <Button
                                         type="button"
                                         fullWidth
@@ -145,7 +153,6 @@ class Register extends React.Component {
                                     >
                                         Sign Up
                                     </Button>
-                                </Link>
                             </Grid>
 
                             <Grid container justify="flex-end">

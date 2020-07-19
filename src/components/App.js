@@ -21,6 +21,7 @@ import Redirect from "react-router-dom/es/Redirect";
 import historyBooking from "./booking/historyBooking";
 import motorBookingHistory from "./booking/motorBookingHistory";
 import trackVehicle from "./map/trackvehicle";
+import EditUser from "./profile/editUser";
 
 export class App extends React.Component {
 
@@ -46,6 +47,7 @@ export class App extends React.Component {
                             <Route path="/bookinghistory" component={historyBooking}/>
                             <Route path="/motorbookinghistory" component={motorBookingHistory}/>
                             <Route path="/trackvehicle" component={trackVehicle}/>
+                            <Route path="/edituser" component={EditUser}/>
                             {/*<Route render={() => <Redirect to="/" />} />*/}
                         </div>
                     </Router>
