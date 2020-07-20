@@ -36,14 +36,7 @@ export class App extends React.Component {
                         <div className="App-body">
                             <Route exact path="/" component={mapHome}/>
                             <Route path="/register" component={Register}/>
-                            <Route path="/staffregister" component={StaffRegister}/>
-                            <Route path="/stafflogin" component={StaffLogin}/>
                             <Route path="/mybookings" component={MyBooking}/>
-                            <Route path="/staff" component={StaffLanding}/>
-                            <Route path="/staffbooking" component={StaffBooking}/>
-                            <Route path="/staffuserlist" component={StaffUserList}/>
-                            <Route path="/staffcarlist" component={StaffCarList}/>
-                            <Route path="/staffaddcar" component={StaffCarAdd}/>
                             <Route path="/bookinghistory" component={historyBooking}/>
                             <Route path="/motorbookinghistory" component={motorBookingHistory}/>
                             <Route path="/trackvehicle" component={trackVehicle}/>
@@ -53,7 +46,30 @@ export class App extends React.Component {
                     </Router>
                 </div>
             )
-        } else {
+        }
+        if(localStorage.getItem("stafftoken") != null) {
+            return(
+                <div>
+                    <Router history={history}>
+                        <MenuAppBar/>
+                    </Router>
+                    <Router history={history}>
+                        <div className="App-body">
+                            <Route exact path="/" component={mapHome}/>
+                            <Route path="/staffregister" component={StaffRegister}/>
+                            <Route path="/stafflogin" component={StaffLogin}/>
+                            <Route path="/staff" component={StaffLanding}/>
+                            <Route path="/staffbooking" component={StaffBooking}/>
+                            <Route path="/staffuserlist" component={StaffUserList}/>
+                            <Route path="/staffcarlist" component={StaffCarList}/>
+                            <Route path="/staffaddcar" component={StaffCarAdd}/>
+                            {/*<Route render={() => <Redirect to="/" />} />*/}
+                        </div>
+                    </Router>
+                </div>
+            )
+        }
+        else {
             return(
                 <div>
                     <Router history={history}>
@@ -66,12 +82,6 @@ export class App extends React.Component {
                             <Route path="/register" component={Register}/>
                             <Route path="/staffregister" component={StaffRegister}/>
                             <Route path="/stafflogin" component={StaffLogin}/>
-                            <Route path="/staff" component={StaffLanding}/>
-                            <Route path="/staffbooking" component={StaffBooking}/>
-                            <Route path="/staffuserlist" component={StaffUserList}/>
-                            <Route path="/staffcarlist" component={StaffCarList}/>
-                            <Route path="/staffaddcar" component={StaffCarAdd}/>
-                            {/*<Route render={() => <Redirect to="/" />} />*/}
                         </div>
                     </Router>
                 </div>

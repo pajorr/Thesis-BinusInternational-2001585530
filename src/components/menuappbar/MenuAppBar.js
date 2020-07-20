@@ -102,7 +102,7 @@ export default function PersistentDrawerLeft() {
     }
 
     function handleLoggedIn() {
-        if(localStorage.getItem("token") != null) {
+        if(localStorage.getItem("token") != null || localStorage.getItem("stafftoken") != null) {
             return (
                 <Link to="/" className={classes.loginLink} style={{textDecorationLine: 'none'}}>
                     <Button variant="contained" className={classes.loginButton} onClick={logoutButtonClick}>
@@ -143,6 +143,7 @@ export default function PersistentDrawerLeft() {
 
     function logoutButtonClick() {
         localStorage.removeItem("token");
+        localStorage.removeItem("stafftoken");
         localStorage.clear();
         window.location.reload();
     }

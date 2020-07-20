@@ -12,7 +12,7 @@ import Container from '@material-ui/core/Container';
 
 import useStyles from './staffCarAdd.css';
 
-class Login extends React.Component {
+class EditVehicle extends React.Component {
 
     constructor(props){
         super(props);
@@ -28,7 +28,8 @@ class Login extends React.Component {
             image: {},
             latitude: {},
             longitude: {},
-            staff_id: {}
+            staff_id: {},
+            selectedVehicle: {}
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -37,7 +38,7 @@ class Login extends React.Component {
 
     addCar() {
         return fetch('http://159.65.129.126/api/cars', {
-            method: 'POST',
+            method: 'PUT',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
@@ -65,13 +66,18 @@ class Login extends React.Component {
         this.setState({ [e.target.name]: e.target.value });
     };
 
+    componentDidMount() {
+        this.setState({...this.state.selectedVehicle, selectedVehicle: this.props.data});
+        console.log(this.state.selectedVehicle);
+    }
+
     render() {
         return(
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
                 <div className={useStyles.paper}>
                     <Typography component="h1" variant="h5">
-                        Add Vehicle
+                        Edit Vehicle
                     </Typography>
                     <form className={useStyles.form} noValidate>
                         <TextField
@@ -86,6 +92,7 @@ class Login extends React.Component {
                             autoFocus
                             style={{borderColor: "#00c853 !important"}}
                             onChange={this.handleChange}
+                            value={this.state.selectedVehicle.vehicle_name}
                         />
                         <TextField
                             variant="outlined"
@@ -96,6 +103,7 @@ class Login extends React.Component {
                             label="Vehicle Type"
                             id="vehicle_type"
                             onChange={this.handleChange}
+                            value={this.state.selectedVehicle.vehicle_type}
                         />
                         <TextField
                             variant="outlined"
@@ -106,6 +114,7 @@ class Login extends React.Component {
                             label="Vehicle Category"
                             id="vehicle_category"
                             onChange={this.handleChange}
+                            value={this.state.selectedVehicle.vehicle_category}
                         />
                         <TextField
                             variant="outlined"
@@ -116,6 +125,7 @@ class Login extends React.Component {
                             label="Plate Number"
                             id="car_type"
                             onChange={this.handleChange}
+                            value={this.state.selectedVehicle.plate_number}
                         />
                         <TextField
                             variant="outlined"
@@ -126,6 +136,7 @@ class Login extends React.Component {
                             label="Fuel"
                             id="fuel"
                             onChange={this.handleChange}
+                            value={this.state.selectedVehicle.fuel}
                         />
                         <TextField
                             variant="outlined"
@@ -136,6 +147,7 @@ class Login extends React.Component {
                             label="Description"
                             id="description"
                             onChange={this.handleChange}
+                            value={this.state.selectedVehicle.description}
                         />
                         <TextField
                             variant="outlined"
@@ -146,6 +158,7 @@ class Login extends React.Component {
                             label="Price"
                             id="price"
                             onChange={this.handleChange}
+                            value={this.state.selectedVehicle.price}
                         />
                         <TextField
                             variant="outlined"
@@ -156,6 +169,7 @@ class Login extends React.Component {
                             label="Image"
                             id="image"
                             onChange={this.handleChange}
+                            value={this.state.selectedVehicle.image}
                         />
                         <TextField
                             variant="outlined"
@@ -166,6 +180,7 @@ class Login extends React.Component {
                             label="Latitude"
                             id="latitude"
                             onChange={this.handleChange}
+                            value={this.state.selectedVehicle.latitude}
                         />
                         <TextField
                             variant="outlined"
@@ -176,6 +191,7 @@ class Login extends React.Component {
                             label="Longitude"
                             id="longitude"
                             onChange={this.handleChange}
+                            value={this.state.selectedVehicle.longitude}
                         />
                         <TextField
                             variant="outlined"
@@ -186,13 +202,14 @@ class Login extends React.Component {
                             label="Staff Id"
                             id="staff_id"
                             onChange={this.handleChange}
+                            value={this.state.selectedVehicle.staff_id}
                         />
                         <Button
-                                type="button"
-                                fullWidth
-                                variant="contained"
-                                className={useStyles.submit}
-                                onClick={this.addCar}
+                            type="button"
+                            fullWidth
+                            variant="contained"
+                            className={useStyles.submit}
+                            onClick={this.addCar}
                         >
                             Add
                         </Button>
@@ -205,4 +222,4 @@ class Login extends React.Component {
 
 
 
-export default Login;
+export default EditVehicle;

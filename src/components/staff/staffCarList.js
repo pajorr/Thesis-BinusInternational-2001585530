@@ -11,6 +11,7 @@ import ListItemText from "@material-ui/core/ListItemText/ListItemText";
 import Divider from "@material-ui/core/Divider/Divider";
 import InboxIcon from '@material-ui/icons/Inbox';
 import { Link } from 'react-router-dom';
+import EditVehicle from "./staffEditVehicle";
 
 //1. declare style as function var
 const styles = theme => ({
@@ -30,6 +31,8 @@ class StaffCarList extends React.Component {
 
         this.state = {
             carList: [],
+            editVehicle: false,
+            selectedVehicle: {}
         }
     }
 
@@ -60,6 +63,31 @@ class StaffCarList extends React.Component {
         }).catch(err => console.log(err));
     }
 
+    editVehicle(obj) {
+        this.setState({...this.state.editVehicle, editVehicle: true});
+        this.setState({...this.state.selectedVehicle, selectedVehicle: obj});
+    }
+
+    renderVehicleList() {
+        if(this.state.editVehicle === true) {
+            return(<EditVehicle data={this.state.selectedVehicle}/>)
+        } else {
+            return(
+                <div>
+                    <List component="nav" aria-label="main mailbox folders">
+                        <Link to="/staff">
+                            <Button>◀ Back</Button>
+                        </Link>
+                        <Link to="/staffaddcar">
+                            <Button>Add</Button>
+                        </Link>
+                    </List>
+                    {this.renderCarList()}
+                </div>
+            )
+        }
+    }
+
     componentDidMount() {
         this.getBookingList();
     }
@@ -88,7 +116,7 @@ class StaffCarList extends React.Component {
                             <ListItemText secondary={"Longitude: " + obj.longitude} />
                             <ListItemText secondary={"Latitude: " + obj.latitude} />
                             <ListItemText secondary={"Status: " + obj.taken} />
-                            <Button>Edit</Button>
+                            <Button onClick={() => this.editVehicle(obj)}>Edit</Button>
                             <Button onClick={() => this.deleteVehicle(obj.id)}>Delete</Button>
                         </ListItem>
                     </List>
@@ -101,15 +129,7 @@ class StaffCarList extends React.Component {
     render() {
         return(
             <div>
-                <List component="nav" aria-label="main mailbox folders">
-                    <Link to="/staff">
-                        <Button>◀ Back</Button>
-                    </Link>
-                    <Link to="/staffaddcar">
-                        <Button>Add</Button>
-                    </Link>
-                </List>
-                {this.renderCarList()}
+                {this.renderVehicleList()}
             </div>
         )
     }
