@@ -48,7 +48,7 @@ class Login extends React.Component {
                 localStorage.setItem("stafftoken", JSON.parse(tokenString).data.token);
                 localStorage.setItem("staffid", JSON.parse(tokenString).data.user.id);
                 localStorage.setItem("staffname", JSON.parse(tokenString).data.user.name);
-                history.push('/staff');
+                history.push("/staff");
                 window.location.reload();
             })
         }
@@ -93,7 +93,7 @@ class Login extends React.Component {
                             onChange={this.handleChange}
                         />
                         <Button
-                                type="submit"
+                                type="button"
                                 fullWidth
                                 variant="contained"
                                 className={useStyles.submit}

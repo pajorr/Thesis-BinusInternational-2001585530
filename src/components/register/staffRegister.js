@@ -68,7 +68,7 @@ class StaffRegister extends React.Component {
                     password: this.state.password
                 })
             }).then(function res(response) {
-                history.push('/');
+                history.push('/stafflogin');
                 window.location.reload();
                 return response.json();
             })
@@ -144,7 +144,7 @@ class StaffRegister extends React.Component {
                             {/*</Grid>*/}
                             <Grid item xs={12}>
                                     <Button
-                                        type="submit"
+                                        type="button"
                                         fullWidth
                                         variant="contained"
                                         className={useStyles.submit}
